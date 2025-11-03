@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ZZZEST - Каталог женской одежды</title>
+<style>
+  * {
+    box-sizing: border-box;
+  }
+  body, html {
+    margin: 0; padding: 0; font-family: Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    border-bottom: 1px solid #ccc;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: white;
+  }
+
+  .simple-hero {
+    position: relative;
+    width: 100%;
+    height: 70vh; /* 70% от высоты экрана */
+    max-height: 600px; /* Максимальная высота */
+    min-height: 400px; /* Минимальная высота */
+    overflow: hidden;
+  }
+  
+  .hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  
+  .hero-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 15px 30px;
+    font-size: 1.2em;
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid #333;
+    cursor: pointer;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    z-index: 2;
+  }
+  
+  .hero-button:hover {
+    background: #333;
+    color: white;
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+
+  .search {
+    flex: 1;
+  }
+  .brand {
+    flex: 1;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.5em;
+  }
+  .header-icons {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+  }
+  .header-icons button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5em;
+  }
+
+  /* Категории товаров */
+  .categories {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    flex-wrap: wrap;
+    background: #f9f9f9;
+  }
+  
+  .category {
+    text-align: center;
+    width: 150px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  .category:hover {
+    transform: translateY(-5px);
+  }
+  
+  .category img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  
+  .category span {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+  }
+
+  /* Каталог товаров */
+  .catalog {
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .catalog-title {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 1.8em;
+  }
+  
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
+  }
+  
+  .product-card {
+    border: 1px solid #eee;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: white;
+  }
+  
+  .product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  }
+  
+  .product-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+  }
+  
+  .product-info {
+    padding: 15px;
+  }
+  
+  .product-name {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .product-price {
+    color: #e44d26;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .add-to-cart {
+    width: 100%;
+    padding: 10px;
+    background: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .add-to-cart:hover {
+    background: #555;
+  }
+
+  /* О компании */
+  .about {
+    padding: 40px 20px;
+    background: #f9f9f9;
+    text-align: center;
+  }
+  
+  .about h2 {
+    margin-bottom: 20px;
+  }
+  
+  .about p {
+    max-width: 800px;
+    margin: 0 auto 20px;
+    line-height: 1.6;
+  }
+
+  /* Рассылка */
+  .newsletter {
+    padding: 40px 20px;
+    background: #333;
+    color: white;
+    text-align: center;
+  }
+  
+  .newsletter h2 {
+    margin-bottom: 20px;
+  }
+  
+  .newsletter-form {
+    display: flex;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  .newsletter-form input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+  }
+  
+  .newsletter-form button {
+    padding: 10px 20px;
+    background: #e44d26;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+
+  footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px;
+    border-top: 1px solid #ccc;
+    font-size: 0.9em;
+    background: #f9f9f9;
+    margin-top: auto;
+  }
+  
+  .footer-left {
+    flex: 1 1 300px;
+  }
+  
+  .footer-center {
+    flex: 1 1 100px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    align-items: center;
+  }
+  
+  .footer-center a {
+    text-decoration: none;
+    color: #333;
+    transition: transform 0.2s ease;
+    display: inline-block;
+  }
+  
+  .footer-center a:hover {
+    transform: scale(1.1);
+  }
+  
+  .footer-center img {
+    width: 30px; 
+    height: 30px; 
+    object-fit: contain;
+  }
+  
+  .footer-right {
+    flex: 1 1 300px;
+    text-align: right;
+  }
+  
+  /* Адаптивность */
+  @media (max-width: 768px) {
+    header {
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .search, .brand, .header-icons {
+      width: 100%;
+    }
+    
+    .products-grid {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+    
+    .newsletter-form {
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    footer {
+      flex-direction: column;
+      text-align: center;
+      gap: 20px;
+    }
+    
+    .footer-right {
+      text-align: center;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="search">
+    <input type="text" placeholder="Найти на сайте" style="width: 100%; padding: 8px;" />
+  </div>
+  <div class="brand">ZZZEST</div>
+  <div class="header-icons">
+    <button title="Избранные товары" aria-label="Избранные товары">❤</button>
+    <button title="Вход в аккаунт" aria-label="Вход в аккаунт">👤</button>
+    <button title="Меню" aria-label="Меню">☰</button>
+  </div>
+</header>
+
+<div class="simple-hero">
+  <img src="BackgroundChinaGirlPickture.jpg" alt="Новая коллекция" class="hero-image">
+  <a href="/catalog/" class="hero-button">Коллекция</a>
+</div>
+
+<!-- Категории товаров -->
+<div class="categories">
+  <div class="category">
+    <img src="https://via.placeholder.com/150" alt="Платья">
+    <span>Платья</span>
+  </div>
+  <div class="category">
+    <img src="https://via.placeholder.com/150" alt="Блузки">
+    <span>Блузки</span>
+  </div>
+  <div class="category">
+    <img src="https://via.placeholder.com/150" alt="Юбки">
+    <span>Юбки</span>
+  </div>
+  <div class="category">
+    <img src="https://via.placeholder.com/150" alt="Брюки">
+    <span>Брюки</span>
+  </div>
+  <div class="category">
+    <img src="https://via.placeholder.com/150" alt="Аксессуары">
+    <span>Аксессуары</span>
+  </div>
+</div>
+
+<!-- Каталог товаров -->
+<div class="catalog">
+  <h2 class="catalog-title">Новинки</h2>
+  <div class="products-grid">
+    <div class="product-card">
+      <img src="https://via.placeholder.com/300x400" alt="Элегантное платье" class="product-image">
+      <div class="product-info">
+        <div class="product-name">Элегантное платье миди</div>
+        <div class="product-price">4 990 ₽</div>
+        <button class="add-to-cart">В корзину</button>
+      </div>
+    </div>
+    <div class="product-card">
+      <img src="https://via.placeholder.com/300x400" alt="Блузка с жабо" class="product-image">
+      <div class="product-info">
+        <div class="product-name">Блузка с жабо</div>
+        <div class="product-price">3 490 ₽</div>
+        <button class="add-to-cart">В корзину</button>
+      </div>
+    </div>
+    <div class="product-card">
+      <img src="https://via.placeholder.com/300x400" alt="Юбка-карандаш" class="product-image">
+      <div class="product-info">
+        <div class="product-name">Юбка-карандаш</div>
+        <div class="product-price">2 990 ₽</div>
+        <button class="add-to-cart">В корзину</button>
+      </div>
+    </div>
+    <div class="product-card">
+      <img src="https://via.placeholder.com/300x400" alt="Комплект трикотажный" class="product-image">
+      <div class="product-info">
+        <div class="product-name">Комплект трикотажный</div>
+        <div class="product-price">5 990 ₽</div>
+        <button class="add-to-cart">В корзину</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- О компании -->
+<div class="about">
+  <h2>О бренде ZZZEST</h2>
+  <p>ZZZEST - это современный бренд женской одежды, создающий стильные и качественные вещи для уверенных в себе женщин. Мы следим за последними тенденциями моды и предлагаем нашим клиенткам только лучшее.</p>
+  <p>Наша миссия - помочь каждой женщине раскрыть свою индивидуальность через стиль и комфорт.</p>
+</div>
+
+<!-- Рассылка -->
+<div class="newsletter">
+  <h2>Подпишитесь на нашу рассылку</h2>
+  <p>Узнавайте первыми о новых коллекциях и специальных предложениях</p>
+  <form class="newsletter-form">
+    <input type="email" placeholder="Ваш email" required>
+    <button type="submit">Подписаться</button>
+  </form>
+</div>
+
+<footer>
+  <div class="footer-left">
+    <p>© 2025 ZZZEST. Все права защищены.</p>
+  </div>
+  <div class="footer-center">
+    <a href="https://instagram.com" target="_blank" title="Instagram" aria-label="Instagram">
+      <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram">
+    </a>
+    <a href="https://telegram.org" target="_blank" title="Telegram" aria-label="Telegram">
+      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="Telegram">
+    </a>
+  </div>
+  <div class="footer-right">
+    <p>+375 (25) 456-20-67<br>zzzest.brand@gmail.com</p>
+  </div>
+</footer>
+
+</body>
+</html>

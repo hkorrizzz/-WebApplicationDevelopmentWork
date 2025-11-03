@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+</head>
+<body>
+    <h1>User Information</h1>
+    
+    <div id="userInfo"></div>
+    
+    <br>
+    <a href="MainPage.html">Back to Registration Form</a>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        
+        const firstname = urlParams.get('firstname');
+        const lastname = urlParams.get('lastname');
+        const email = urlParams.get('email');
+        const birth = urlParams.get('birth');
+        const country = urlParams.get('country');
+
+        function calculateDaysUntilBirthday(birthDate) {
+            const today = new Date();
+            const nextBirthday = new Date(birthDate);
+    
+            nextBirthday.setFullYear(today.getFullYear());
+            if (nextBirthday < today) {
+                nextBirthday.setFullYear(today.getFullYear() + 1);
+            }
+    
+            let daysCount = 0;
+            const dateForCount = new Date(today);
+    
+            while (dateForCount < nextBirthday) {
+                dateForCount.setDate(dateForCount.getDate() + 1);
+                daysCount++;
+            }   
+            
+            return daysCount;
+            }
+
+        function formatDate(dateString) {
+        
+            return new Date(dateString).toLocaleDateString('ru-RU');
+        }
+
+        const userInfoElement = document.getElementById('userInfo');
+        
+        if (firstname) {
+            saveUserData(firstname, lastname, email, birth, country);
+            userInfoElement.innerHTML = `
+                <p>Hello, ${firstname} ${lastname}!</p>
+                ${birth ? `<p>There are ${calculateDaysUntilBirthday(birth)} days until your next birthday!</p>` : ''}
+                <h3>User Details:</h3>
+                <p>
+                    First Name: ${firstname}<br>
+                    Last Name: ${lastname}<br>
+                    Email: ${email}<br>
+                    Date of Birth: ${birth ? formatDate(birth) : 'Not provided'}<br>
+                    Country: ${country}
+                </p>`;
+        } else {
+            userInfoElement.innerHTML = '<p>No user information found.</p>';
+        }   
+
+        function saveUserData(firstname, lastname, email, birth, country) {
+            const userData = {
+                firstname,
+                lastname,
+                email,
+                birth,
+                country
+            };
+
+            // Сохранение в Session Storage (на время сессии)
+            sessionStorage.setItem('userData', JSON.stringify(userData));
+            console.log('Data saved to Session Storage');
+
+            // Сохранение в Local Storage (постоянно)
+            localStorage.setItem('userData', JSON.stringify(userData));
+            console.log('Data saved to Local Storage');
+
+            // Сохранение в Cookies (с истечением в 1 год)
+            const expirationDate = new Date();
+            expirationDate.setFullYear(expirationDate.getFullYear() + 1);
+            document.cookie = `userData=${encodeURIComponent(JSON.stringify(userData))}; expires=${expirationDate.toUTCString()}; path=/`;
+            console.log('Data saved to Cookies');
+
+            // Сохранение в IndexedDB (асинхронно)
+            const request = indexedDB.open('UserDatabase', 1);
+            request.onupgradeneeded = function(event) {
+                const db = event.target.result;
+                if (!db.objectStoreNames.contains('users')) {
+                    db.createObjectStore('users', { keyPath: 'id' });
+                }
+            };
+            request.onsuccess = function(event) {
+                const db = event.target.result;
+                const transaction = db.transaction(['users'], 'readwrite');
+                const store = transaction.objectStore('users');
+                store.put({ id: 'userProfile', ...userData });
+                console.log('Data saved to IndexedDB');
+            };
+            request.onerror = function(event) {
+                console.error('Error saving to IndexedDB:', event.target.error);
+            };
+        }
+
+
+
+
+    </script>
+</body>
+</html>
