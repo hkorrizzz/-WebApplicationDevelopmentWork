@@ -101,5 +101,8 @@ header {
     margin-bottom: 20px;
     font-weight: 300;
     font-size: 14px;
-     border: 1px solid black;
+     border: 2px solid #eee;
+    padding: 10px; 
+     display: flex;
+    align-items: center; 
 }
