@@ -65,47 +65,65 @@ header {
     font-size: 1.5em;
 }
 
-/* Название */
-
-.name-element {
-    font-weight: 300;
-    font-size: 20px;
-    text-align: center;
-    margin-top: 20px;
-    margin-bottom: 30px;
+.cont1 {
+margin-top: 20px;
+    margin-left: 90px;
+    display: flex;
+    flex-direction: row; /* элементы в строку */
+    gap: 5px; 
 }
 
-/*Границы блока*/
+/*кнопка возврата*/
+.come-back {
+    
+    height: 38px;
+    width: 125px;
+    padding: 8px 16px;
+    background: #2f2f2f;
+    color: white;
+    text-decoration: none;
+    font-size: 17px;
+    font-weight: 300;
+    transition: background 1s ease;
+    white-space: nowrap;
+    position: fixed;
+}
 
-.AboutUsTextContainer {
+.come-back:hover {
+    background: white;
+    color: black;
+    border:  1px solid black;
+}
+
+/*фотография*/
+.product-image {
+    height: 950px;
+    width: 700px;
+    object-fit: cover;
+}
+
+.container {
+    
     margin-bottom: 60px;
-    margin-left: 150px;
-    margin-right: 150px;
+    margin-left: 200px;
+    margin-right: 120px;
+    display: flex;  
+    flex-direction: row; /* элементы в строку */
+    gap: 70px; /* расстояние между элементами */
+}
+.item {
+    padding: 10px;
+    background: #f0f0f0;
 }
 
-.Discription {
-    font-weight: 300;
-    text-align: justify;
-    font-size: 18px;
-    line-height: 1.5;
-}
-.boldText {
-    font-weight: bold; letter-spacing: 1px;
-}
+/*описание*/
 
-.QuestionBold {
-     font-weight: bold; font-size: 18px; margin-top: 80px; letter-spacing: 0.5px;  margin-bottom: 20px;
-}
 
-.FrameWhithTextAndIcon {
-    margin-bottom: 20px;
-    font-weight: 300;
-    font-size: 14px;
-     border: 2px solid #eee;
-    padding: 10px; 
-     display: flex;
-    align-items: center; 
-}
+
+
+
+
+
 
 /*футер*/
 
@@ -145,5 +163,3 @@ footer {
     height: 30px; 
     object-fit: contain;
 }
-
-
