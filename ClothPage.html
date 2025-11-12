@@ -17,6 +17,7 @@
             <button title="Избранные товары" aria-label="Избранные товары"> <img src="pictures/heart-Photoroom.png"   class="header-icon"></button>
             <button title="Вход в аккаунт" aria-label="Вход в аккаунт"><img src="pictures/profil-Photoroom.png"   class="header-icon"></button>
             <button title="Меню" aria-label="Меню"><img src="pictures/menu-icon.jpg"   class="header-icon"></button>
+
         </div>
 
 
@@ -27,8 +28,47 @@
     <div class="container">
     
     <img src="pictures/dress1.jpg" alt="Элегантное платье миди" class="product-image">
-    <div class="item">Элемент 2</div>
-    
+    <div class="Information">
+        
+        <div class="name">ПЛАТЬЕ МИДИ</div>
+        <div class="name" style = "margin-top: -20px;">A34B42</div>
+
+        <button   button title="Избранные товары" class="addToFavoriteBackSlyle" id="favoriteBtn">
+            <img src="pictures/heart-Photoroom.png" class="addToFavoriteSlyle" id="heartIcon">
+        </button>        <div class="price">297.00 BYN</div>
+
+        <details >
+            <summary class = "typeCloth">ТИП ИЗДЕЛИЯ</summary>
+            <p class="typeClothName">Платье</p>
+        </details>  
+        <details >
+            <summary class = "typeCloth">РАЗМЕРНАЯ СЕТКА</summary>
+            <p class="typeClothName">42-46</p>  
+        </details>  
+         <details >
+            <summary class = "typeCloth">ОПИСАНИЕ</summary>
+            <p class="typeClothName">Платье приталенного силуэта, выполнено из розового твида, с мелкими пайетками. Характеристики: приталенный силуэт, подкладка, V-образный вырез, по груди нашиты выточки, декоративные карманы по переду изделия, застежка петли пуговицы из основной ткани изделия. По центру спинки шов. Длина изделия по спинке 80см</p>
+        </details>  
+        <details open style="margin-bottom: -25px;">
+            <summary class = "typeCloth" style="margin-bottom: 20px;">НАЛИЧИЕ В МАГАЗИНАХ</summary>
+            <p class="typeClothName">
+                <div class="storeAdress">Минск, ТЦ "Dana Mall"</div>
+                <div class="availability">Нет в наличии</div>
+
+                <div class="storeAdress">Минск, ТРЦ "Галерея Минск"</div>
+                <div class="availability">Нет в наличии</div>
+
+                <div class="storeAdress">Брест, ул. 17-го сентября 12</div>
+                <div class="availability">Нет в наличии</div>
+
+
+                <div class="storeAdress">Гродно, ул. Советская 10</div>
+                <div class="availability">Нет в наличии</div>
+
+        </details> 
+
+
+    </div>  
     </div></div>
 
 
@@ -51,5 +91,6 @@
         </div>
     </footer>
 
+    <script src="JSCode/ClothPageJS.js"></script>
 </body>
 </html>

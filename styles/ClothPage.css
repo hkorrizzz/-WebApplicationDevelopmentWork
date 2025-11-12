@@ -105,20 +105,84 @@ margin-top: 20px;
 .container {
     
     margin-bottom: 60px;
-    margin-left: 200px;
+    margin-left: 210px;
     margin-right: 120px;
     display: flex;  
     flex-direction: row; /* элементы в строку */
-    gap: 70px; /* расстояние между элементами */
-}
-.item {
-    padding: 10px;
-    background: #f0f0f0;
+    gap: 40px; /* расстояние     между элементами */
 }
 
 /*описание*/
 
+.Information {
+    position: sticky;
+    top: 100px; /* Когда доскролливают до этого положения - блок прилипает */
+    display: flex;  
+    flex-direction: column;
+    gap: 25px;
+    width: 370px;
+    padding: 60px;
+    padding-top: 0%;
+    align-self: flex-start; /* Важно для sticky */
+    margin-left: 40px; /* Отступ от изображения */
+}
 
+
+.name {
+    font-size: 25px;
+    font-weight: 350;
+    color:  rgb(139, 137, 137);
+}
+.addToFavoriteSlyle {
+     width: 45px;  /* Размер изображения: 24px ширина */
+    height: 45px;  /* 24px высота */
+    object-fit: contain;  /* Сохраняет пропорции, если heart.png не квадратное */
+    margin-left: -10px;
+}
+.addToFavoriteBackSlyle { 
+     width: 45px;   height: 45px;  background-color: transparent;     border:0cm ;
+}
+
+.price {
+    font-size: 17px;
+     border:  1px solid black;
+     padding: 6px;
+     text-align: center;
+     font-weight: 300;
+}
+
+.typeCloth {
+    
+    font-size: 14px;
+    font-weight: 300;
+    color:  rgb(139, 137, 137);
+    margin-bottom: -10px;
+}
+.typeCloth:hover {
+    text-decoration: underline;
+}
+
+.typeClothName {
+     font-size: 13.5px;
+    font-weight: 300;
+   line-height: 1.5;
+   text-align: justify;
+   margin-bottom: -9px;
+}
+
+.storeAdress {
+    font-size: 13.5px;
+     background-color:  #ededed75;
+     padding: 6px;
+     
+     font-weight: 300;
+}   
+.availability {
+     font-size: 13.5px;
+     padding: 6px;
+     font-weight: 300;
+  margin-bottom: 10px;
+}
 
 
 
