@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <form action="SPage1.html" method="post">
+        Your first name: <input type="text" name="firstname"><br/>
+        Your last name: <input type="text" name="lastname"><br/>
+        E-mail: <input type="text" name="email"><br/>
+        Password: <input type="password" name="password"><br/>
+        Confirm password: <input type="password" name="confirmPassword"><br/>
+        Date of birth: <input type="date" name="birth"><br/>
+        <label for="country">Country</label>
+        <select id="country" name="country">
+            <option value="">Select Country</option>
+            <option value="Russia">Russia</option>
+            <option value="Belarus">Belarus</option>
+            <option value="USA">United States</option>
+            <option value="Canada">Canada</option>
+            <option value="UK">United Kingdom</option>
+            <option value="Germany">Germany</option>
+        </select><br/>
+        <input type="reset" value="Reset">
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const password = document.querySelector('input[name="password"]').value;
+            const confirmPassword = document.querySelector('input[name="confirmPassword"]').value;
+            
+            if (password !== confirmPassword) {
+                e.preventDefault();
+                alert('Пароли не совпадают!');
+                return;
+            }
+            else {
+                const firstname = document.querySelector('input[name="firstname"]').value;
+                const lastname = document.querySelector('input[name="lastname"]').value;
+                const email = document.querySelector('input[name="email"]').value;
+                const birth = document.querySelector('input[name="birth"]').value;
+                const country = document.querySelector('select[name="country"]').value;
+
+                localStorage.setItem('userFirstname', firstname);
+                localStorage.setItem('userLastname', lastname);
+                localStorage.setItem('userEmail', email);
+                localStorage.setItem('userBirth', birth);
+                localStorage.setItem('userCountry', country);
+
+
+
+
+                
+            }
+        });
+    </script>
+</body>
+</html>
