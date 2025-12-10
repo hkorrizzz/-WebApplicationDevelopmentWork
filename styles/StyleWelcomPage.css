@@ -11,59 +11,6 @@ body, html {
     flex-direction: column;
 }
 
-/* Header Styles */
-header {
-    
-    height: 75px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 20px;
-    border-bottom: 1px solid #ccc;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: white;
-}
-
-.header-icon {
-
-    width: 40px;  /* Размер изображения: 24px ширина */
-    height: 40px;  /* 24px высота */
-    object-fit: contain;  /* Сохраняет пропорции, если heart.png не квадратное */
-    background: transparent;  
-}
-
-.search {
-    flex: 1;
-}
-
-.search input {
-    width: 100%;
-    padding: 8px;
-}
-
-.brand {
-    flex: 1;
-    text-align: center;
-    letter-spacing: 1px;
-    font-size: 38px;
-    font-family: 'Roboto', sans-serif;
-}
-
-.header-icons {
-    flex: 1;
-    display: flex;
-    justify-content: flex-end;
-    gap: 15px;
-}
-
-.header-icons button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 1.5em;
-}
 
 /* Hero Section */
 .simple-hero {
@@ -221,26 +168,24 @@ font-weight: 200;}
     width: 275px;
     height: 300;
     border: 1px solid #eee;
-
     overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.4s ease;
     background: white;
-}
-
-.product-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    position: relative;
 }
 
 .product-image {
     width: 100%;
     height: 300px;
     object-fit: cover;
+    transition: transform 0.6s ease;
+}
+.product-card:hover .product-image {
+    transform: scale(1.05);
 }
 
 .product-info {
     padding: 15px;
-    
 }
 
 .product-name {
@@ -251,7 +196,6 @@ font-weight: 200;}
 }
 
 .product-price {
- 
     font-weight: 310px;
     margin-bottom: 10px;
     font-size: 14px;
@@ -265,13 +209,11 @@ font-weight: 200;}
     border: none;
     cursor: pointer;
     transition: background 0.3s ease;
-
 }
 
 .add-to-cart:hover {
     background: #696969;
 }
-
 /* About Section */
 .about {
     padding: 40px 20px;
@@ -371,42 +313,357 @@ footer {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    header {
-        flex-direction: column;
-        gap: 10px;
+
+    .category-title {
+        font-size: 10px;
     }
-    
-    .search, .brand, .header-icons {
-        width: 100%;
+    .product-card {
+        width: 220px;
     }
+    .product-name {
+        font-size: 13px;
+    }
+    .product-price {
+        font-size: 13px;
+    }
+}
+
+
+@media (max-width: 992px) {
+
+    .product-card {
+        width: 210px;
+    }
+    .product-name {
+        font-size: 13px;
+    }
+    .product-price {
+        font-size: 13px;
+    }
+
+}
+
+@media (max-width: 768px) {
+
     
     .product-card {
-        width: 200px;
+        width: 215px;
     }
-    
-    .category-header {
-        flex-direction: column;
-        gap: 10px;
-        text-align: center;
+    .product-name {
+        font-size: 13px;
     }
-    
-    .newsletter-form {
-        flex-direction: column;
-        gap: 10px;
+    .product-price {
+        font-size: 13px;
     }
+}
+* {
+    box-sizing: border-box;
+}
+
+body, html {
+    margin: 0; 
+       
+    font-family: 'Roboto', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* Hero Section */
+.simple-hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-button {
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 15px 30px;
+    font-size: 16px;
+    background: rgba(255, 255, 255, 0.3);
+    border: 1px solid #ffffff;
+    cursor: pointer;
+    text-decoration: none;
+    color: #ffffff;
+    transition: all 0.3s ease;
+    width: 200px;
+    height: 45px;
+
+    display: flex;
+    align-items: center;    
+    justify-content: center; 
+    text-align: center;
+
+font-family: 'Roboto', sans-serif;
+font-weight: 200;}
+
+.hero-button:hover {
+    background: #33333300;
+
+}
+
+/* Categories */
+.categories {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    flex-wrap: wrap;
+    background: #f9f9f9;
+}
+
+.category {
+    text-align: center;
+    width: 150px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.category:hover {
+    transform: translateY(-5px);
+}
+
+.category img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.category span {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+/* Catalog Styles */
+.catalog {
+    padding: 40px 30px;
+ 
+}
+
+.category-section {
+    margin-bottom: 50px;
+}
+
+.category-header {
+    display: flex;
+    align-items: center;
     
-    .newsletter-form input,
-    .newsletter-form button {
-        border-radius: 4px;
+    gap: 15px;
+}
+
+.category-title {
+    font-size: 22px;
+   font-weight: 300;
+}
+
+.header-divider {
+    flex-grow: 1;
+    height: 1px;
+    background: rgb(200, 198, 198);
+}
+
+.view-all-btn {
+    padding: 8px 16px;
+    background: #2f2f2f;
+    color: white;
+    text-decoration: none;
+    font-size: 17px;
+    font-weight: 300;
+    transition: background 0.3s ease;
+    white-space: nowrap;
+}
+
+.view-all-btn:hover {
+    background: white;
+    color: black;
+    border:  1px solid black;
+}
+
+/* Products Scroll */
+.products-scroll {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding: 10px 0;
+    scrollbar-width: thin;
+    scrollbar-color: #ccc transparent;
+}
+
+.products-scroll::-webkit-scrollbar {
+    height: 6px;
+}
+
+.products-scroll::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.products-scroll::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 3px;
+}
+
+.products-scroll::-webkit-scrollbar-thumb:hover {
+    background: #aaa;
+}
+
+/* Product Cards */
+.product-card {
+    flex: 0 0 auto;
+    width: 275px;
+    height: 300;
+    border: 1px solid #eee;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    background: white;
+    position: relative;
+}
+
+.product-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+.product-card:hover .product-image {
+    transform: scale(1.05);
+}
+
+.product-info {
+    padding: 15px;
+}
+
+.product-name {
+    font-weight: 310;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: rgb(139, 134, 134);
+}
+
+.product-price {
+    font-weight: 310px;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.add-to-cart {
+    width: 100%;
+    padding: 10px;
+    background: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.add-to-cart:hover {
+    background: #696969;
+}
+/* About Section */
+.about {
+    padding: 40px 20px;
+    background: #f9f9f9;
+    text-align: center;
+}
+
+.about h2 {
+    margin-bottom: 20px;
+}
+
+.about p {
+    max-width: 800px;
+    margin: 0 auto 20px;
+    line-height: 1.6;
+}
+
+/* Newsletter */
+.newsletter {
+    padding: 40px 20px;
+    background: #e1e1e1;
+    color: rgb(0, 0, 0);
+    text-align: center;
+}
+
+.newsletter h2 {
+    margin-bottom: 20px;
+}
+
+.newsletter-form {
+    display: flex;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.newsletter-form input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 4px 0 0 4px;
+}
+
+.newsletter-form button {
+    padding: 10px 20px;
+    background: #e44d26;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 0 4px 4px 0;
+}
+
+
+
+@media (max-width: 992px) {
+
+    .product-card {
+        width: 210px;
     }
-    
-    footer {
-        flex-direction: column;
-        text-align: center;
-        gap: 20px;
+    .product-name {
+        font-size: 13px;
     }
-    
-    .footer-right {
-        text-align: center;
+    .product-price {
+        font-size: 13px;
+    }
+
+}
+
+@media (max-width: 768px) {
+
+    .product-card {
+        width: 220px;
+    }
+    .product-name {
+        font-size: 13px;
+    }
+    .product-price {
+        font-size: 13px;
+    }
+
+}
+
+
+@media (max-width: 576px) {
+
+   
+    .product-card {
+        width: 240px;
+    }
+    .product-name {
+        font-size: 13px;
+    }
+    .product-price {
+        font-size: 13px;
     }
 }

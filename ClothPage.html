@@ -5,75 +5,100 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Одежда ZZZEST</title>
     <link rel="stylesheet" href="styles/ClothPage.css">
+        <link rel="stylesheet" href="styles/HeaderMenuStyles.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-     <header>
-        <div class="search">
-            <input type="text" placeholder="Найти на сайте" />
-        </div>
-        <div class="brand">ZZZEST</div>
-        <div class="header-icons">
-            <button title="Избранные товары" aria-label="Избранные товары"> <img src="pictures/heart-Photoroom.png"   class="header-icon"></button>
-            <button title="Вход в аккаунт" aria-label="Вход в аккаунт"><img src="pictures/profil-Photoroom.png"   class="header-icon"></button>
-            <button title="Меню" aria-label="Меню"><img src="pictures/menu-icon.jpg"   class="header-icon"></button>
-
-        </div>
-
-
-    </header>   
+<header>
+    <div class="search">
+        <input type="text" placeholder="Найти на сайте" />
+    </div>
+    <div class="brand">
+        <a href="WelcomPage.html">ZZZEST</a>
+    </div>
+    <div class="header-icons">
+        <button title="Избранные товары" aria-label="Избранные товары"><img src="pictures/heart-Photoroom.png" class="header-icon"></button>
+        <button title="Вход в аккаунт" aria-label="Вход в аккаунт"><img src="pictures/profil-Photoroom.png" class="header-icon"></button>
+        <button id="menuButton" title="Меню" aria-label="Меню"><img src="pictures/menu-icon.jpg" class="header-icon"></button>
+    </div>
     
-    <div class = "cont1">
-    <a href="WelcomPage.html" class="come-back">В МАГАЗИН</a>
-    <div class="container">
+    <div id="dropdownMenu" class="dropdown-menu">
+        <div class="menu-section">
+            <div class="section-title">Навигация</div>
+            <a href="WelcomPage.html">Главная</a>
+            <a href="AboutUsPage.html">О нас</a>
+            <a href="StoresPage.html">Магазины</a>
+            <a href="#">Блог</a>
+        </div>
+        <div class="menu-section">
+            <div class="section-title">Каталог</div>
+            <a href="#">Платья</a>
+            <a href="#">Юбки</a>
+            <a href="#">Жакеты</a>
+            <a href="#">Аксессуары</a>
+        </div>
+    </div>
+</header>  
     
-    <img src="pictures/dress1.jpg" alt="Элегантное платье миди" class="product-image">
-    <div class="Information">
-        
-        <div class="name">ПЛАТЬЕ МИДИ</div>
-        <div class="name" style = "margin-top: -20px;">A34B42</div>
+    <div class="main-container">
+        <div class="product-content">
+            <a href="WelcomPage.html" class="come-back">В МАГАЗИН</a>
+            
+            <img src="pictures/dress1.jpg" alt="Элегантное платье миди" class="product-image">
+            
+            <div class="product-info">
+                <div class="name">ПЛАТЬЕ МИДИ</div>
+                <div class="product-code">A34B42</div>
 
-        <button   button title="Избранные товары" class="addToFavoriteBackSlyle" id="favoriteBtn">
-            <img src="pictures/heart-Photoroom.png" class="addToFavoriteSlyle" id="heartIcon">
-        </button>        <div class="price">297.00 BYN</div>
+                <button title="Избранные товары" class="addToFavoriteBackSlyle" id="favoriteBtn">
+                    <img src="pictures/heart-Photoroom.png" class="addToFavoriteSlyle" id="heartIcon">
+                </button>
+                
+                <div class="price">297.00 BYN</div>
 
-        <details >
-            <summary class = "typeCloth">ТИП ИЗДЕЛИЯ</summary>
-            <p class="typeClothName">Платье</p>
-        </details>  
-        <details >
-            <summary class = "typeCloth">РАЗМЕРНАЯ СЕТКА</summary>
-            <p class="typeClothName">42-46</p>  
-        </details>  
-         <details >
-            <summary class = "typeCloth">ОПИСАНИЕ</summary>
-            <p class="typeClothName">Платье приталенного силуэта, выполнено из розового твида, с мелкими пайетками. Характеристики: приталенный силуэт, подкладка, V-образный вырез, по груди нашиты выточки, декоративные карманы по переду изделия, застежка петли пуговицы из основной ткани изделия. По центру спинки шов. Длина изделия по спинке 80см</p>
-        </details>  
-        <details open style="margin-bottom: -25px;">
-            <summary class = "typeCloth" style="margin-bottom: 20px;">НАЛИЧИЕ В МАГАЗИНАХ</summary>
-            <p class="typeClothName">
-                <div class="storeAdress">Минск, ТЦ "Dana Mall"</div>
-                <div class="availability">Нет в наличии</div>
-
-                <div class="storeAdress">Минск, ТРЦ "Галерея Минск"</div>
-                <div class="availability">Нет в наличии</div>
-
-                <div class="storeAdress">Брест, ул. 17-го сентября 12</div>
-                <div class="availability">Нет в наличии</div>
-
-
-                <div class="storeAdress">Гродно, ул. Советская 10</div>
-                <div class="availability">В наличии: 40, 42, 46</div>
-
-        </details> 
-
-
-    </div>  
-    </div></div>
-
-
-
-
+                <details>
+                    <summary class="typeCloth">ТИП ИЗДЕЛИЯ</summary>
+                    <p class="typeClothName">Платье</p>
+                </details>
+                
+                <details>
+                    <summary class="typeCloth">РАЗМЕРНАЯ СЕТКА</summary>
+                    <p class="typeClothName">42-46</p>
+                </details>
+                
+                <details>
+                    <summary class="typeCloth">ОПИСАНИЕ</summary>
+                    <p class="typeClothName">Платье приталенного силуэта, выполнено из розового твида, с мелкими пайетками. Характеристики: приталенный силуэт, подкладка, V-образный вырез, по груди нашиты выточки, декоративные карманы по переду изделия, застежка петли пуговицы из основной ткани изделия. По центру спинки шов. Длина изделия по спинке 80см</p>
+                </details>
+                
+                <details open>
+                    <summary class="typeCloth">НАЛИЧИЕ В МАГАЗИНАХ</summary>
+                    <div class="store-availability">
+                        <div class="store-item">
+                            <div class="storeAdress">Минск, ТЦ "Dana Mall"</div>
+                            <div class="availability">Нет в наличии</div>
+                        </div>
+                        
+                        <div class="store-item">
+                            <div class="storeAdress">Минск, ТРЦ "Галерея Минск"</div>
+                            <div class="availability">Нет в наличии</div>
+                        </div>
+                        
+                        <div class="store-item">
+                            <div class="storeAdress">Брест, ул. 17-го сентября 12</div>
+                            <div class="availability">Нет в наличии</div>
+                        </div>
+                        
+                        <div class="store-item">
+                            <div class="storeAdress">Гродно, ул. Советская 10</div>
+                            <div class="availability">В наличии: 40, 42, 46</div>
+                        </div>
+                    </div>
+                </details>
+            </div>
+        </div>
+    </div>
+    
     <footer>
         <div class="footer-left">
             <p>© 2025 ZZZEST. Все права защищены.</p>
@@ -91,6 +116,7 @@
         </div>
     </footer>
 
+    <script src="JSCode/HeaderMenuScript.js"></script>
     <script src="JSCode/ClothPageJS.js"></script>
 </body>
 </html>
