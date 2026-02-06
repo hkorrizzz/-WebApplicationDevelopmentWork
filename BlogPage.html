@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Блог | ZZZEST</title>
+    <link rel="stylesheet" href="styles/BlogPage.css">
+    <link rel="stylesheet" href="styles/HeaderMenuStyles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<header>
+    <div class="search">
+        <input type="text" placeholder="Найти на сайте" />
+    </div>
+    <div class="brand">
+        <a href="WelcomePage.php">ZZZEST</a>
+    </div>
+    <div class="header-icons">
+        <button title="Избранные товары" aria-label="Избранные товары" onclick="window.location.href='FavoritesPage.php'"><img src="pictures/heart-Photoroom.png" class="header-icon"></button>
+        <button title="Вход в аккаунт" aria-label="Вход в аккаунт"><img src="pictures/profil-Photoroom.png" class="header-icon"></button>
+        <button id="menuButton" title="Меню" aria-label="Меню"><img src="pictures/menu-icon.jpg" class="header-icon"></button>
+    </div>
+    
+    <div id="dropdownMenu" class="dropdown-menu">
+        <div class="menu-section">
+            <div class="section-title">Навигация</div>
+            <a href="WelcomePage.php">Главная</a>
+            <a href="AboutUsPage.html">О нас</a>
+            <a href="StoresPage.html">Магазины</a>
+            <a href="BlogPage.html">Блог</a>
+        </div>
+        <div class="menu-section">
+            <div class="section-title">Каталог</div>
+            <a href="CatalogPage.php?type=ПЛАТЬЯ">Платья</a>
+            <a href="CatalogPage.php?type=ЮБКИ">Юбки</a>
+            <a href="CatalogPage.php?type=ЖАКЕТЫ">Жакеты</a>
+            <a href="CatalogPage.php?type=БЛУЗКИ">Блузки</a>
+            <a href="CatalogPage.php?type=ВЕРХНЯЯ ОДЕЖДА">Верхняя одежда</a>
+            <a href="CatalogPage.php?type=ФУТБОЛКИ">Футболки</a>
+            <a href="CatalogPage.php?type=БРЮКИ">Брюки</a>
+            <a href="CatalogPage.php?type=ШОРТЫ">Шорты</a>
+            <a href="CatalogPage.php?type=ЖИЛЕТЫ">Жилеты</a>
+            <a href="CatalogPage.php?type=ТОПЫ">Топы</a>
+            <a href="CatalogPage.php?type=АКСЕССУАРЫ">Аксессуары</a>
+        </div>
+    </div>
+</header>
+
+    <div class="blog-container">
+        <div class="name-element">БЛОГ ZZZEST</div>
+        
+        <div class="blog-content">
+            <p class="large-text">
+                Добро пожаловать в блог ZZZEST! Здесь мы делимся последними новостями, модными тенденциями и советами по стилю.
+            </p>
+            
+            <p class="large-text">
+                Следите за нашими обновлениями в социальных сетях, чтобы быть в курсе всех новинок и акций.
+            </p>
+            
+            <div class="social-section">
+                <h2 class="social-title">МЫ В СОЦИАЛЬНЫХ СЕТЯХ</h2>
+                
+                <div class="social-grid">
+                    <a href="https://instagram.com/zzzest" class="social-card" target="_blank">
+                        <div class="social-name">Instagram</div>
+                        <div class="social-desc">Ежедневные образы и новинки коллекций</div>
+                    </a>
+                    
+                    <a href="https://t.me/zzzest" class="social-card" target="_blank">
+                        <div class="social-name">Telegram</div>
+                        <div class="social-desc">Эксклюзивные скидки и новинки</div>
+                    </a>
+                    
+                    <a href="https://vk.com/zzzest" class="social-card" target="_blank">
+                        <div class="social-name">VKontakte</div>
+                        <div class="social-desc">Общение и конкурсы</div>
+                    </a>
+                    
+                    <a href="https://www.youtube.com/@zzzest" class="social-card" target="_blank">
+                        <div class="social-name">YouTube</div>
+                        <div class="social-desc">Look-буки и советы по стилю</div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="subscribe-section">
+                <h2 class="subscribe-title">ПОДПИШИТЕСЬ НА РАССЫЛКУ</h2>
+                <p class="large-text">Получайте информацию о новинках и скидках</p>
+                
+                <form class="subscribe-form">
+                    <input type="email" placeholder="Ваш email" required>
+                    <button type="submit">ПОДПИСАТЬСЯ</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-left">
+            <p>© 2025 ZZZEST. Все права защищены.</p>
+        </div>
+        <div class="footer-center">
+            <a href="https://instagram.com" target="_blank" title="Instagram" aria-label="Instagram">
+                <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram">
+            </a>
+            <a href="https://telegram.org" target="_blank" title="Telegram" aria-label="Telegram">
+                <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="Telegram">
+            </a>
+        </div>
+        <div class="footer-right">
+            <p>+375 (25) 456-20-67<br>zzzest.brand@gmail.com</p>
+        </div>
+    </footer>
+    
+    <script src="JSCode/HeaderMenuScript.js"></script>
+</body>
+</html>
