@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
     
     // Для каждой кнопки проверяем, есть ли товар в избранном
-    document.querySelectorAll('.add-to-favorites').forEach(button => {
+    document.querySelectorAll('.add-to-favorites, .add-to-cart').forEach(button => {
         const productId = button.getAttribute('data-product-id');
         
         if (favorites.includes(productId)) {

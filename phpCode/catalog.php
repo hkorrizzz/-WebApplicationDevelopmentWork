@@ -22,7 +22,6 @@ try {
     // Создаем фильтр по типу
     $filter = ['type' => $type];
     
-    // Запрашиваем нужные поля
     $options = [
         'projection' => [
             '_id' => 1,
@@ -33,13 +32,12 @@ try {
             'article' => 1,
             'description' => 1
         ],
-        'limit' => 15 // Больше товаров для каталога
+        'limit' => 15 
     ];
     
     $query = new MongoDB\Driver\Query($filter, $options);
     $cursor = $manager->executeQuery("clothingStoreCatalog.products", $query);
     
-    // Проверяем, есть ли товары
     $products = [];
     foreach ($cursor as $document) {
         $products[] = $document;
@@ -52,7 +50,6 @@ try {
         exit;
     }
     
-    // Отображаем товары
     foreach ($products as $product) {
         $id = (string)$product->_id;
         $name = htmlspecialchars($product->name ?? 'Без названия');
@@ -60,7 +57,6 @@ try {
         $image = htmlspecialchars($product->image ?? 'pictures/no-image.jpg');
         $article = htmlspecialchars($product->article ?? '');
         
-        // Обрабатываем путь к картинке
         if (strpos($image, 'productsPictures/') === 0) {
             $image = '../pictures/' . substr($image, strlen('productsPictures/'));
         } elseif (strpos($image, 'pictures/') !== 0) {

@@ -1,3 +1,55 @@
+<?php
+require_once 'connection.php';
+
+if (!isset($_GET['id']) || empty($_GET['id'])) {
+    die("<div style='color: red; text-align: center; padding: 20px;'>Ошибка: ID товара не указан.</div>");
+}
+
+$productId = $_GET['id'];
+
+$stmt = $pdo->prepare("SELECT _id, name, price, image, type, article, description, availability, size_range FROM products WHERE _id = :id LIMIT 1");
+$stmt->execute(['id' => $productId]);
+$product = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if (!$product) {
+    die("<div style='color: red; text-align: center; padding: 20px;'>Товар не найден.</div>");
+}
+
+$id = htmlspecialchars($product['_id']);
+$name = htmlspecialchars($product['name'] ?? 'Без названия');
+$price = htmlspecialchars($product['price'] ?? '0');
+$image = htmlspecialchars($product['image'] ?? 'pictures/no-image.jpg');
+$article = htmlspecialchars($product['article'] ?? '');
+$description = htmlspecialchars($product['description'] ?? 'Нет описания');
+$type = htmlspecialchars($product['type'] ?? 'Не указан');
+$size_range = htmlspecialchars($product['size_range'] ?? '42-46');
+$availability = json_decode($product['availability'] ?? '{}', true);
+
+if (strpos($image, 'productsPictures/') === 0) {
+    $image = 'pictures/' . substr($image, strlen('productsPictures/'));
+}
+
+function showAvailability($availability) {
+    if (isset($availability['quantity'])) {
+        return $availability['quantity'] > 0 ? 'В наличии: ' . $availability['quantity'] . ' шт.' : 'Нет в наличии';
+    }
+    
+    $sizes = $availability['sizes'] ?? [];
+    if (!empty($sizes)) {
+        $inStock = [];
+        foreach ($sizes as $size => $qty) {
+            if ($qty > 0) $inStock[] = $size;
+        }
+        return !empty($inStock) ? 'В наличии: ' . implode(', ', $inStock) : 'Нет в наличии';
+    }
+    
+    if (isset($availability['in_stock']) && $availability['in_stock'] === true) {
+        return 'В наличии';
+    }
+    
+    return 'Нет в наличии';
+}
+?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -9,72 +61,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-<?php
-
-if (!isset($_GET['id']) || empty($_GET['id'])) {
-    die("<div style='color: red; text-align: center; padding: 20px;'>❌ Ошибка: ID товара не указан.</div>");
-}
-
-$productId = $_GET['id'];
-
-try {
-    $manager = new MongoDB\Driver\Manager("mongodb://localhost:27017");
-    
-    $filter = ['_id' => new MongoDB\BSON\ObjectId($productId)];
-    $options = [
-        'projection' => [
-            '_id' => 1,
-            'name' => 1,
-            'price' => 1,
-            'image' => 1,
-            'type' => 1,
-            'article' => 1,
-            'description' => 1
-        ],
-        'limit' => 1
-    ];
-    
-    $query = new MongoDB\Driver\Query($filter, $options);
-    $cursor = $manager->executeQuery("clothingStoreCatalog.products", $query);
-    
-    $product = null;
-   
-    $product = $document;
-   
-    
-    if (!$product) {
-        die("<div style='color: red; text-align: center; padding: 20px;'>❌ Товар не найден.</div>");
-    }
-    
-    $id = (string)$product->_id;
-    $name = htmlspecialchars($product->name ?? 'Без названия');
-    $price = htmlspecialchars($product->price ?? '0');
-    $image = htmlspecialchars($product->image ?? 'pictures/no-image.jpg');
-    $article = htmlspecialchars($product->article ?? '');
-    $description = htmlspecialchars($product->description ?? 'Нет описания');
-    $type = htmlspecialchars($product->type ?? 'Не указан');
-    
-    if (strpos($image, 'productsPictures/') === 0) {
-        $image = 'pictures/' . substr($image, strlen('productsPictures/'));
-    } elseif (strpos($image, 'pictures/') !== 0) {
-        $image = 'pictures/' . $image;
-    }
-    
-} 
- catch (Exception $e) {
-    die("<div style='color: red; text-align: center; padding: 20px;'>❌ Ошибка: " . $e->getMessage() . "</div>");
-}
-?>
 
 <header>
     <div class="search">
         <input type="text" placeholder="Найти на сайте" />
     </div>
     <div class="brand">
-        <a href="WelcomePage.php">ZZZEST</a>
+        <a href="ZZZEST.php">ZZZEST</a>
     </div>
     <div class="header-icons">
-        <button title="Избранные товары" aria-label="Избранные товары" onclick="window.location.href='FavoritesPage.php'"><img src="pictures/heart-Photoroom.png" class="header-icon"></button>
+        <button title="Избранные товары" aria-label="Избранные товары" onclick="window.location.href='Favorites.php'"><img src="pictures/heart-Photoroom.png" class="header-icon"></button>
         <button title="Вход в аккаунт" aria-label="Вход в аккаунт"><img src="pictures/profil-Photoroom.png" class="header-icon"></button>
         <button id="menuButton" title="Меню" aria-label="Меню"><img src="pictures/menu-icon.jpg" class="header-icon"></button>
     </div>
@@ -82,34 +78,27 @@ try {
     <div id="dropdownMenu" class="dropdown-menu">
         <div class="menu-section">
             <div class="section-title">Навигация</div>
-            <a href="WelcomePage.php">Главная</a>
+            <a href="ZZZEST.php">Главная</a>
             <a href="AboutUsPage.html">О нас</a>
             <a href="StoresPage.html">Магазины</a>
             <a href="BlogPage.html">Блог</a>
         </div>
         <div class="menu-section">
             <div class="section-title">Каталог</div>
-            <div class="section-title">Каталог</div>
-            <a href="CatalogPage.php?type=ПЛАТЬЯ">Платья</a>
-            <a href="CatalogPage.php?type=ЮБКИ">Юбки</a>
-            <a href="CatalogPage.php?type=ЖАКЕТЫ">Жакеты</a>
-            <a href="CatalogPage.php?type=БЛУЗКИ">Блузки</a>
-            <a href="CatalogPage.php?type=ВЕРХНЯЯ ОДЕЖДА">Верхняя одежда</a>
-            <a href="CatalogPage.php?type=ФУТБОЛКИ">Футболки</a>
-            <a href="CatalogPage.php?type=БРЮКИ">Брюки</a>
-            <a href="CatalogPage.php?type=ШОРТЫ">Шорты</a>
-            <a href="CatalogPage.php?type=ЖИЛЕТЫ">Жилеты</a>
-            <a href="CatalogPage.php?type=ТОПЫ">Топы</a>
-            <a href="CatalogPage.php?type=АКСЕССУАРЫ">Аксессуары</a>
+            <a href="Category.php?type=ЮБКИ">Юбки</a>
+            <a href="Category.php?type=ФУТБОЛКИ">Футболки</a>
+            <a href="Category.php?type=БРЮКИ">Брюки</a>
+            <a href="Category.php?type=ТОПЫ">Топы</a>
+            <a href="Category.php?type=АКСЕССУАРЫ">Аксессуары</a>
         </div>
     </div>
 </header>  
     
 <div class="main-container">
     <div class="product-content">
-        <a href="WelcomePage.php" class="come-back">В МАГАЗИН</a>
+        <a href="ZZZEST.php" class="come-back">В МАГАЗИН</a>
         
-        <img src="<?php echo $image; ?>" alt="<?php echo $name; ?>" class="product-image" onerror="this.src='pictures/no-image.jpg'">
+        <img src="<?php echo $image; ?>" alt="<?php echo $name; ?>" class="product-image">
         
         <div class="product-info">
             <div class="name"><?php echo strtoupper($name); ?></div>
@@ -121,6 +110,7 @@ try {
             
             <div class="price"><?php echo $price; ?> BYN</div>
 
+
             <details>
                 <summary class="typeCloth">ТИП ИЗДЕЛИЯ</summary>
                 <p class="typeClothName"><?php echo $type; ?></p>
@@ -128,7 +118,7 @@ try {
             
             <details>
                 <summary class="typeCloth">РАЗМЕРНАЯ СЕТКА</summary>
-                <p class="typeClothName">42-46</p>
+                <p class="typeClothName"><?php echo $size_range; ?></p>
             </details>
             
             <details>
@@ -141,22 +131,22 @@ try {
                 <div class="store-availability">
                     <div class="store-item">
                         <div class="storeAdress">Минск, ТЦ "Dana Mall"</div>
-                        <div class="availability">В наличии: 40, 48</div>
+                        <div class="availability"><?= showAvailability($availability) ?></div>
                     </div>
                     
                     <div class="store-item">
                         <div class="storeAdress">Минск, ТРЦ "Галерея Минск"</div>
-                        <div class="availability">Нет в наличии</div>
+                        <div class="availability"><?= showAvailability($availability) ?></div>
                     </div>
                     
                     <div class="store-item">
                         <div class="storeAdress">Брест, ул. 17-го сентября 12</div>
-                        <div class="availability">В наличии: 40, 42, 46, 48</div>
+                        <div class="availability"><?= showAvailability($availability) ?></div>
                     </div>
                     
                     <div class="store-item">
                         <div class="storeAdress">Гродно, ул. Советская 10</div>
-                        <div class="availability">В наличии: 40, 42, 46</div>
+                        <div class="availability"><?= showAvailability($availability) ?></div>
                     </div>
                 </div>
             </details>

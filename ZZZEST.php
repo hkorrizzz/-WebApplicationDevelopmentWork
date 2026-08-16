@@ -1,3 +1,8 @@
+<?php
+require_once 'connection.php';
+
+$selectedType = $_GET['type'] ?? null;
+?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -14,10 +19,10 @@
         <input type="text" placeholder="Найти на сайте" />
     </div>
     <div class="brand">
-        <a href="WelcomePage.php">ZZZEST</a>
+        <a href="ZZZEST.php">ZZZEST</a>
     </div>
     <div class="header-icons">
-        <button title="Избранные товары" aria-label="Избранные товары" onclick="window.location.href='FavoritesPage.php'"><img src="pictures/heart-Photoroom.png" class="header-icon"></button>
+        <button title="Избранные товары" aria-label="Избранные товары" onclick="window.location.href='Favorites.php'"><img src="pictures/heart-Photoroom.png" class="header-icon"></button>
         <button id="registerButton" title="Регистрация" aria-label="Регистрация"><img src="pictures/profil-Photoroom.png" class="header-icon"></button>
         <button id="menuButton" title="Меню" aria-label="Меню"><img src="pictures/menu-icon.jpg" class="header-icon"></button>
     </div>
@@ -57,24 +62,18 @@
     <div id="dropdownMenu" class="dropdown-menu">
         <div class="menu-section">
             <div class="section-title">Навигация</div>
-            <a href="WelcomePage.php">Главная</a>
+            <a href="ZZZEST.php">Главная</a>
             <a href="AboutUsPage.html">О нас</a>
             <a href="StoresPage.html">Магазины</a>
             <a href="BlogPage.html">Блог</a>
         </div>
         <div class="menu-section">
             <div class="section-title">Каталог</div>
-            <a href="CatalogPage.php?type=ПЛАТЬЯ">Платья</a>
-            <a href="CatalogPage.php?type=ЮБКИ">Юбки</a>
-            <a href="CatalogPage.php?type=ЖАКЕТЫ">Жакеты</a>
-            <a href="CatalogPage.php?type=БЛУЗКИ">Блузки</a>
-            <a href="CatalogPage.php?type=ВЕРХНЯЯ ОДЕЖДА">Верхняя одежда</a>
-            <a href="CatalogPage.php?type=ФУТБОЛКИ">Футболки</a>
-            <a href="CatalogPage.php?type=БРЮКИ">Брюки</a>
-            <a href="CatalogPage.php?type=ШОРТЫ">Шорты</a>
-            <a href="CatalogPage.php?type=ЖИЛЕТЫ">Жилеты</a>
-            <a href="CatalogPage.php?type=ТОПЫ">Топы</a>
-            <a href="CatalogPage.php?type=АКСЕССУАРЫ">Аксессуары</a>
+            <a href="Category.php?type=ЮБКИ">Юбки</a>
+            <a href="Category.php?type=ФУТБОЛКИ">Футболки</a>
+            <a href="Category.php?type=БРЮКИ">Брюки</a>
+            <a href="Category.php?type=ТОПЫ">Топы</a>
+            <a href="Category.php?type=АКСЕССУАРЫ">Аксессуары</a>
         </div>
     </div>
 </header>
@@ -87,12 +86,10 @@
     <div class="catalog" id="catalog-section">
         <div class="category-section">
             <?php 
-                // 
-                    $type = 'ПЛАТЬЯ';
-                    include 'phpCode/products.php'; 
-                ?>
+                $type = $selectedType;
+                include 'phpCode/products_sql.php'; 
+            ?>
         </div>
-
     </div>
 
     <div class="about">
@@ -136,7 +133,7 @@
         
         @media (prefers-reduced-motion: reduce) {
             html {
-                scroll-behavior: auto;
+                scroll-behavior: auto;  
             }
         }
     </style>
