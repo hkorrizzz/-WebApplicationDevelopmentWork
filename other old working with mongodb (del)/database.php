@@ -7,7 +7,7 @@ class MongoDBConnection {
     
     public function __construct() {
         try {
-            // Подключение к MongoDB
+
             $this->client = new MongoDB\Client("mongodb://localhost:27017");
             $this->database = $this->client->clothingStoreCatalog;
         } catch (Exception $e) {
@@ -42,9 +42,8 @@ class MongoDBConnection {
         try {
             $collection = $this->database->products;
             
-            // Получаем уникальные категории
             $categories = $collection->distinct('type');
-            return array_filter($categories); // Убираем пустые значения
+            return array_filter($categories); 
             
         } catch (Exception $e) {
             error_log("Ошибка получения категорий: " . $e->getMessage());
