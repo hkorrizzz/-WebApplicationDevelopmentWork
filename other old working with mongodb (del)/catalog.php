@@ -1,10 +1,9 @@
 <?php
-// catalog.php - отображает товары только для страницы каталога
+
 
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-// Проверяем наличие расширения MongoDB
 if (!extension_loaded('mongodb')) {
     echo "<div style='color: red; text-align: center; padding: 20px;'>";
     echo "❌ Ошибка: Расширение MongoDB не установлено.";
@@ -12,14 +11,12 @@ if (!extension_loaded('mongodb')) {
     exit;
 }
 
-// Получаем тип из внешней переменной или параметра
 $type = isset($type) ? $type : (isset($_GET['type']) ? $_GET['type'] : 'ПЛАТЬЯ');
 
 try {
-    // Подключаемся к MongoDB
+
     $manager = new MongoDB\Driver\Manager("mongodb://localhost:27017");
     
-    // Создаем фильтр по типу
     $filter = ['type' => $type];
     
     $options = [
